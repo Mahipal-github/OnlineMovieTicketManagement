@@ -1,0 +1,66 @@
+
+<div class="searchMovie" class="row justify-content-center jumbotron">
+        <div>
+          <form name="movie" #Movie="ngForm" (ngSubmit)="searchMovie(Movie)" >
+            <table>
+              <tr>Search Movie</tr>
+              <tr>
+                <td>
+                  
+                  <input name="name" type="text" [(ngModel)]="name" #Name="ngModel" class="form-control" autofocus required>
+                </td>
+                <br>
+              </tr>
+              <tr>
+                <td style="text-align: center;" >
+                  <button class="btn btn-success"  [disabled]="!Movie.valid" type="submit">Submit</button>
+                </td>
+              </tr>
+              
+      
+              <tr>
+                <td>
+                  <div *ngIf="Name.invalid && (Name.dirty || Name.touched)">
+                    <div *ngIf="Name.errors.required" style="color:green;">Please Enter Name/Genre/Language/Director</div>
+                    <div *ngIf="Name.errors.minlength" style="color: green;">Please Enter more than 2 characters</div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </form>  
+        </div>
+</div>
+
+
+          
+<div *ngIf="toggleMovieList">
+  <table class="table table-warning">
+    <tr>
+      <th>Poster</th>
+      <th><label>Movie ID</label> </th>
+      <th><label>Movie Name</label> </th>
+      <th><label>Movie Language</label> </th>
+      <th><label>Movie active</label> </th>
+      <th><label>Movie director</label> </th>
+      <th><label>Movie genre</label> </th>
+    </tr>
+
+    <tr class="movieTable" *ngFor= "let i of movieList; let even=even; let odd=odd" [ngClass]="{odd:odd, even:even}">
+      <img src="assets/MovieImages/{{i.movieId}}.jpg" height="200" width="250"/>
+      <th>{{i.movieId}}</th>
+      <th>{{i.movieName | titlecase}}</th>
+      <th>{{i.language | titlecase}}</th>
+      <th>{{i.active}}</th>
+      <th>{{i.director | titlecase}}</th>
+      <th>{{i.genre | titlecase}}</th>
+      <a class="btn btn-success" routerLink="/displayshows/{{i.movieId}}">View Shows</a>
+      <a class="btn btn-info" routerLink="/displayscreens/{{i.movieId}}">View Screens</a>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf="showError" class="text-center" >
+  <h2>{{errorMsg}}</h2>
+</div>
+
+  

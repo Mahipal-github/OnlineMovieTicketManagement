@@ -1,0 +1,33 @@
+<div *ngIf="showAllMovies">
+  <table class="table table-danger">
+    <tr>
+      <th>MoviePoster</th>
+      <th><label>Movie ID</label> </th>
+      <th><label>Movie Name</label> </th>
+      <th><label>Movie Language</label> </th>
+      <th><label>Movie active</label> </th>
+      <th><label>Movie director</label> </th>
+      <th><label>Movie genre</label> </th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <tr class="movieTable" *ngFor= "let i of movies"  [ngClass]="{odd:odd, even:even}">
+      
+      <img src="assets/MovieImages/{{i.movieId}}.jpg" class="img-rounded" height="200" width="250"/>
+     
+      <th>{{i.movieId  }}</th>
+      <th>{{i.movieName | titlecase}}</th>
+      <th>{{i.language | titlecase}}</th>
+      <th>{{i.active}}</th>
+      <th>{{i.director | titlecase}}</th>
+      <th>{{i.genre | titlecase}}</th>
+      <th><a class="btn btn-info" routerLink="/displayshows/{{i.movieId}}">View Shows</a></th>
+      <th><a class="btn btn-info" routerLink="/displayscreens/{{i.movieId}}">View Screen</a></th>
+    </tr>
+  </table>
+</div>
+
+<diV *ngIf="showError" class="text-center">
+  <h2>{{errorMsg}}</h2>
+</diV>

@@ -1,0 +1,39 @@
+<div class="row justify-content-center jumbotron" style="padding: unset;">
+  <span class="btn btn-warning" style="width: 100%;" routerLink="searchPage" role="button">Search</span>     
+  <span class="btn btn-success" style="width: 100%;" routerLink="displayAllMovies" role="button">Display All Movies</span>
+
+</div>
+
+<div *ngIf="showRecentMovies">
+  <table class="table  table-success table-hover table-bordered">
+    <tr>
+      <th>Movie Poster</th>
+      <th><label>Movie ID</label> </th>
+      <th><label>Movie Name</label> </th>
+      <th><label>Movie Language</label> </th>
+      <th><label>Movie active</label> </th>
+      <th><label>Movie director</label> </th>
+      <th><label>Movie genre</label> </th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <tr class="movieTable" *ngFor= "let i of movies; let even=even; let odd=odd" [ngClass]="{odd:odd, even:even}">
+      
+      <img src="assets/MovieImages/{{i.movieId}}.jpg" height="270" width="400"/>
+      <th>{{i.movieId}}</th>
+      <th>{{i.movieName | uppercase}}</th>
+      <th>{{i.language | titlecase}}</th>
+      <th>{{i.active}}</th>
+      <th>{{i.director | titlecase}}</th>
+      <th>{{i.genre  | titlecase}}</th>
+      <th><a class="btn btn-success" routerLink="/displayshows/{{i.movieId}}">View Shows</a></th>
+      <th><a class="btn btn-info" routerLink="/displayscreens/{{i.movieId}}">View Screen</a></th>
+    </tr>
+  </table>
+
+</div>
+
+<div *ngIf="showError" class="text-center">
+  <h2>{{errorMsg}}</h2>
+</div>

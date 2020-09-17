@@ -1,0 +1,59 @@
+<body data-spy="scroll" data-target="#navbarResponsive">
+    <nav class="navbar navbar-expand-md  bg-white fixed-top">
+        <div class="container-fluid p-2">
+            <a class="navbar-brand icon"><img src="../assets/icon.png">Online Ticket Service</a>
+
+            <div class="name col-md-4" *ngIf="showNavFlag"></div>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" *ngIf="!loginFlag"><a class="nav-link" routerLink="home">Home</a></li>
+                    <li class="nav-item" *ngIf="!loginFlag"><a class="nav-link" routerLink="contact">About Us</a></li>
+                    <li class="nav-item" *ngIf="!loginFlag"><a class="nav-link" routerLink="searchPage">search</a></li>
+                    <li class="nav-item" *ngIf="!loginFlag"><a class="nav-link" routerLink="bookingDetails">Booking details</a></li>
+                    <li class="nav-item" *ngIf="!loginFlag"><a class="nav-link" routerLink="displayAllMovies">Display Movies</a></li>
+                    <li class="nav-item" *ngIf="!loginFlag"><a class="nav-link" (click)="doLogOut()">Log Out</a></li>
+
+
+                    <li class="nav-item" *ngIf="loginFlag"><a class="nav-link" (click)="showLogin()">Home</a></li>
+                    <li class="nav-item" *ngIf="loginFlag"><a class="nav-link" (click)="showLogin()">About us</a></li>
+                    <li class="nav-item" *ngIf="loginFlag"><a class="nav-link" (click)="showLogin()">Search</a></li>
+                    <li class="nav-item" *ngIf="loginFlag"><a class="nav-link" (click)="showLogin()">Booking Details</a></li>
+                    <li class="nav-item" *ngIf="loginFlag"><a class="nav-link" (click)="showLogin()">Display Movies</a></li>
+                    <li class="nav-item" *ngIf="loginFlag"><a class="nav-link" (click)="showLogin()">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+<section style="min-height: 550px;" class="container-fluid bg col-md-12" *ngIf="showLoginFlag ">
+</section>
+
+<section *ngIf="modalflag">
+    <div class="login-box">
+        <img src="../assets/login.png" alt="">
+        <div class="alert alert-danger" *ngIf="errorMsg!=undefined">{{errorMsg}}</div>
+
+        <h2 class="text-center">Login Credentials</h2>
+        <form #frm="ngForm" (ngSubmit)="doLogin()">
+
+            <input type="text" placeholder="User ID" name="txtid" [(ngModel)]="login.uname" required #bkid="ngModel" class="form-control" />
+            <div class="alert alert-danger" *ngIf="bkid.invalid && bkid.touched">User ID is required</div>
+            <input type="password" placeholder="Password" name="txtpwd" [(ngModel)]="login.pwd" required #bkpwd="ngModel" class="form-control" />
+            <div class="alert alert-danger" *ngIf="bkpwd.invalid && bkpwd.touched">Password is required</div>
+            <div class="mt-2 text-center p-2"><input type="submit" value="Login" [disabled]="!frm.valid" class="btn btn-success" /></div>
+        </form>
+    </div>
+
+
+</section>
+
+<section *ngIf="!showLoginFlag" style="padding-top: 60px;">
+    <router-outlet></router-outlet>
+</section>
+
+
+<footer class="page-footer font-small blue">
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://www.healthline.com/nutrition/27-health-and-nutrition-tips#section4" target="_blank"> MovieManagement</a>
+    </div>
+</footer>
